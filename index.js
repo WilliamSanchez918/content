@@ -1,8 +1,12 @@
 const db = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
 
+// MONGOD DATABASE API
+// For additional information regarding this assembly visit:
+// https://www.w3schools.com/nodejs/nodejs_mongodb.asp
 
-
+// CURRENT METHODS INCLUDE
+// CREATE | UPDATE | DELETE | QUERY
 
 //Database Name 
 dbN = "content"
@@ -22,6 +26,9 @@ let objs = { name: "Broken-Arrow", ver: "x.xx", updated: "10.11.19", }
 
 //Query Object
 let search = { name: "Broken-Arrow" }
+
+//Query Object for Updating Collection
+let newVal = {}
 
 
 
@@ -66,10 +73,32 @@ async function dataObject(cName, dbN, objs) {
     });
 }
 
-//Database Object Deletion
+//Database Object Update
+async function dataObjectUpdate(cName, dbN, objs, search, newVal) {
+    await MongoClient.connect(short, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db(dbN);
+
+        // myquery is the existing collection being updated
+        var myquery = search;
+
+        //Example call below - new values for the myquery object
+        //var newvalues = { $set: {name: "Mickey", address: "Canyon 123" } };
+
+        //Note: only updates the first item matching the query, if multiple items match use: updateMany()
+        var newvalues = newVal;
+        dbo.collection("customers").updateOne(myquery, newvalues, function(err, res) {
+            if (err) throw err;
+            console.log("1 document updated");
+            db.close();
+        });
+    });
+}
+
+//Database Object Deletion [FOR Objects within Collections]
 
 async function dataDelete(cName, dbN, objs) {
-    MongoClient.connect(short, function(err, db) {
+    await MongoClient.connect(short, function(err, db) {
         if (err) throw err
         var dbo = db.db(dbN);
         var myquery = objs;
@@ -81,6 +110,21 @@ async function dataDelete(cName, dbN, objs) {
         })
     })
 }
+
+//Database Collection Deletion [For Collections & objects within]
+
+async function collectionDelete(cName, dbN) {
+    await MongoClient.connect(short, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db(dbN);
+        dbo.collection(`${cName}`).drop(function(err, delOK) {
+            if (err) throw err;
+            if (delOK) console.log("Collection deleted");
+            db.close();
+        });
+    })
+}
+
 
 //Database Queries
 async function queries(cName, dbN, search) {
@@ -105,4 +149,7 @@ async function queries(cName, dbN, search) {
 
 //queries(cName, dbN, search);
 
-dataDelete(cName, dbN, objs)
+//Deletes Objects within collections
+//dataDelete(cName, dbN, objs)
+
+collectionDelete(cName, dbN)
