@@ -1,0 +1,14 @@
+{
+  "name": "contentprogram",
+  "version": "1.0.0",
+  "description": "Content distribution",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Will Sanchez",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "mongodb": "^3.3.2"
+  }
+}
