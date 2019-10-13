@@ -43,7 +43,8 @@ async function createCollection(cName, dbN) {
             ${cName}
             ${dbN}
             ${short}
-            ${dbo}`)
+            ${dbo}
+            ${res}`)
             console.log(`New Collection Created: ${cName}`);
             db.close()
         })
@@ -152,4 +153,4 @@ async function queries(cName, dbN, search) {
 //Deletes Objects within collections
 //dataDelete(cName, dbN, objs)
 
-collectionDelete(cName, dbN)
+//collectionDelete(cName, dbN)
