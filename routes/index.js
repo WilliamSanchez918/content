@@ -6,10 +6,19 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
-/* GET home page. */
-router.get('/slice', function(req, res, next) {
-    res.render('slice', { title: 'slice' });
+/* GET site Locations. */
+router.get('/locations', function(req, res, next) {
+    res.render('locations', { title: 'locations' });
 });
+
+router.get('/players', (req, res, next) => {
+    alert('HELLO welcome to')
+    res.render('players', { title: 'players' })
+})
+
+router.get('/config', (req, res, next) => {
+    res.render('config', { title: 'config' })
+})
 
 
 

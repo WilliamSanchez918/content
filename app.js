@@ -31,8 +31,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //for custom routes replace 'indexRouter' with specific variable and route
 //see above for custom routes (./routes/file.js)
 app.use('/', indexRouter);
-app.use('/slice', indexRouter);
+app.use('/locations', indexRouter);
+app.use('/players', indexRouter);
 app.use('/users', usersRouter);
+app.use('/config', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
