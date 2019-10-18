@@ -12,7 +12,6 @@ router.get('/locations', function(req, res, next) {
 });
 
 router.get('/players', (req, res, next) => {
-    alert('HELLO welcome to')
     res.render('players', { title: 'players' })
 })
 
